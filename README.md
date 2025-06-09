@@ -1,6 +1,6 @@
 # RPG
 
-This repository provides the code for implementing RPG described in our KDD'25 paper "Generating Long Semantic IDs in Parallel for Recommendation".
+This repository provides the code for implementing RPG described in our KDD'25 paper "[Generating Long Semantic IDs in Parallel for Recommendation](https://arxiv.org/abs/2506.05781)".
 
 Semantic ID-based recommendation models tokenize each item into multiple discrete tokens, improving performance, scalability, and memory efficiency. While recent generative models adopt this approach, they suffer from inefficient inference due to resource-intensive beam search and sequential decoding, limiting semantic ID length (typically to 4). We propose RPG, a lightweight framework that produces unordered long semantic IDs, allowing parallel prediction of all tokens. This enables scaling up to 64 tokens per item with strong performance and efficiency.
 
