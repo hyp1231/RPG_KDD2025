@@ -88,6 +88,7 @@ class RPG(AbstractModel):
         self.generate_w_decoding_graph = False
         self.init_flag = False
         self.chunk_size = config['chunk_size']
+        self.num_beams = config['num_beams']
         self.n_edges = config['n_edges']
         self.propagation_steps = config['propagation_steps']
 
@@ -236,7 +237,7 @@ class RPG(AbstractModel):
         # Randomly sample num_beams distinct node IDs in [1..n_nodes]
         topk_nodes_sorted = torch.randint(
             1, self.dataset.n_items,
-            (batch_size, self.config['num_beams']),
+            (batch_size, self.num_beams),
             dtype=torch.long,
             device=token_logits.device
         )
@@ -265,7 +266,7 @@ class RPG(AbstractModel):
                     index=(self.item_id2tokens[neighbors_in_batch] - 1)
                 ).mean(dim=-1)
 
-                idxs = torch.topk(scores, self.config['num_beams']).indices
+                idxs = torch.topk(scores, self.num_beams).indices
                 next_nodes.append(neighbors_in_batch[idxs])
             topk_nodes_sorted = torch.stack(next_nodes, dim=0)
 
